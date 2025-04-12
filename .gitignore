@@ -1,0 +1,12 @@
+*
+
+# whitelist
+!.bashrc
+!.config/
+!.config/sway
+!.config/sway/*
+!.config/foot
+!.config/foot/*
+!.config/i3blocks
+!.config/i3blocks/*
+
