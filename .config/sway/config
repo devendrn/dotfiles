@@ -8,20 +8,22 @@
 #
 # Logo key. Use Mod1 for Alt.
 set $mod Mod4
-# Home row direction keys, like vim
 set $left h
 set $down j
 set $up k
 set $right l
-# Your preferred terminal emulator
 set $term foot
-# Your preferred application launcher
-set $menu wmenu-run
+#set $menu wmenu-run
+set $menu fuzzel
+set $filemanager pcmanfm
 
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
+# output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
+exec brightnessctl s 0
+exec $HOME/.config/sway/scripts/wallpaper.sh
+
 #
 # Example configuration:
 #
@@ -33,22 +35,21 @@ output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
 #
 # Example configuration:
 #
-# exec swayidle -w \
-#          timeout 300 'swaylock -f -c 000000' \
-#          timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
-#          before-sleep 'swaylock -f -c 000000'
-#
+exec swayidle -w \
+         timeout 300 'swaylock -f -c 000000 --indicator-idle-visible' \
+         timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
+         before-sleep 'swaylock -f -c 000000 --indicator-idle-visible'
 # This will lock your screen after 300 seconds of inactivity, then turn off
 # your displays after another 300 seconds, and turn your screens back on when
 # resumed. It will also lock your screen before your computer goes to sleep.
 
 ### Input configuration
 input "type:touchpad" {
-     dwt enabled
-     tap enabled
-     natural_scroll enabled
-     middle_emulation enabled
- }
+    #dwt enabled
+    tap enabled
+    natural_scroll enabled
+    middle_emulation enabled
+}
 #
 # You can get the names of your inputs by running: swaymsg -t get_inputs
 # Read `man 5 sway-input` for more information about this section.
@@ -64,7 +65,7 @@ input "type:touchpad" {
     bindsym $mod+Shift+q kill
 
     # Start your launcher
-    bindsym $mod+d exec $menu
+    bindsym $mod+Space exec $menu
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
@@ -77,7 +78,11 @@ input "type:touchpad" {
     bindsym $mod+Shift+c reload
 
     # Exit sway (logs you out of your Wayland session)
-    bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
+    bindsym $mod+backspace exec $HOME/.config/sway/scripts/power.sh
+    #bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
+
+    bindsym $mod+m exec $filemanager
+    
 #
 # Moving around:
 #
@@ -139,18 +144,14 @@ input "type:touchpad" {
     bindsym $mod+v splitv
 
     # Switch the current container between different layout styles
-    bindsym $mod+s layout stacking
-    bindsym $mod+w layout tabbed
+    # bindsym $mod+q layout stacking
+    bindsym $mod+w layout toggle split tabbed
     bindsym $mod+e layout toggle split
-
-    # Make the current focus fullscreen
     bindsym $mod+f fullscreen
-
-    # Toggle the current focus between tiling and floating mode
-    bindsym $mod+Shift+space floating toggle
+    bindsym $mod+s floating toggle
 
     # Swap focus between the tiling area and the floating area
-    bindsym $mod+space focus mode_toggle
+    bindsym $mod+Shift+s focus mode_toggle
 
     # Move focus to the parent container
     bindsym $mod+a focus parent
@@ -188,6 +189,7 @@ mode "resize" {
     # Return to default mode
     bindsym Return mode "default"
     bindsym Escape mode "default"
+    bindsym $mod+r mode "default"
 }
 bindsym $mod+r mode "resize"
 #
@@ -201,25 +203,33 @@ bindsym $mod+r mode "resize"
     # Special keys to adjust brightness via brightnessctl
     bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%-
     bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+
-    # Special key to take a screenshot with grim
-    bindsym Print exec grim
+    # Special key to take a screenshot
+    bindsym Print exec $HOME/.config/sway/scripts/screenshot.sh
 
-#
-# Status Bar:
-#
-# Read `man 5 sway-bar` for more information about this section.
-bar {
-    position top
+    # Adjust screen resolution
+    bindsym $mod+Alt+Down output eDP-1 res 1280x720
+    bindsym $mod+Alt+Up output eDP-1 res 1920x1080
 
-    # When the status_command prints a new line to stdout, swaybar updates.
-    # The default just shows the current date and time.
-    status_command while date +'%Y-%m-%d %X'; do sleep 1; done
+    bindsym $mod+Alt+Left exec $HOME/.config/sway/scripts/wallpaper.sh --prev
+    bindsym $mod+Alt+Right exec $HOME/.config/sway/scripts/wallpaper.sh --next
 
-    colors {
-        statusline #ffffff
-        background #323232
-        inactive_workspace #32323200 #32323200 #5c5c5c
-    }
-}
+gaps inner 6
+default_border pixel 2
+client.focused "#112269" "#112269" "#f0f0f0"
+client.unfocused "#222222" "#222222" "#f0f0f0"
+client.focused_inactive "#222222" "#222222" "#f0f0f0"
+font sans-serif 10
+hide_edge_borders smart
+
+floating_maximum_size 1600 x 940
+floating_minimum_size 160 x 160
+
+bar swaybar_command waybar
+
+exec mako
+
+# Window rules
+for_window [app_id=pavucontrol] floating on, move position cursor, move down 24
+for_window [app_id=nm-connection-editor] floating on, move position cursor, move down 24
 
 include /etc/sway/config.d/*

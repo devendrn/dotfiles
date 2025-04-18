@@ -1,0 +1,2 @@
+on-notify=exec pw-play $HOME/.config/sway/assets/notify.mp3
+default-timeout=15000

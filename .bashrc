@@ -25,3 +25,7 @@ fi
 unset rc
 
 alias config="git --git-dir=$HOME/.cfg_git/ --work-tree=$HOME"
+
+#if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
+#    sway
+#fi
