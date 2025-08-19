@@ -1,0 +1,24 @@
+*
+
+# whitelist
+!README.md
+!.gitignore
+!.bashrc
+!.bash_profile
+!.config/
+!.config/sway
+!.config/sway/config
+!.config/sway/scripts
+!.config/sway/scripts/*
+!.config/foot
+!.config/foot/foot.ini
+!.config/waybar
+!.config/waybar/*
+!.config/mako
+!.config/mako/config
+!.config/fuzzel
+!.config/fuzzel/fuzzel.ini
+!.config/zed
+!.config/zed/settings.json
+
+
