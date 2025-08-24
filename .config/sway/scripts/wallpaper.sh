@@ -1,6 +1,5 @@
 #!/bin/bash
 
-#WALLPAPER_DIR="$HOME/Wallpapers"
 WALLPAPER_DIR="$HOME/Wallpapers"
 INDEX_FILE="$WALLPAPER_DIR/.current.txt"
 
@@ -14,24 +13,24 @@ get_wallpapers() {
 }
 
 set_wallpaper() {
-  local wallpaper_path="$1"
-  prev_swaybg_ps="$(pgrep swaybg)"
-  swaybg --image "$wallpaper_path" &
-  sleep 0.40
-  if [ -n "$prev_swaybg_ps" ]; then
-    kill $prev_swaybg_ps
+  local WALLPAPER_PATH="$1"
+  PREV_SWAYBG_PS="$(pgrep swaybg)"
+  swaybg --image "$WALLPAPER_PATH" &
+  sleep 0.30
+  if [ -n "$PREV_SWAYBG_PS" ]; then
+    kill $PREV_SWAYBG_PS
   fi
-  #swaymsg output \* bg "$wallpaper_path" fill
+  #swaymsg output \* bg "$WALLPAPER_PATH" fill
 }
 
-wallpapers_array=()
-while IFS= read -r -d $'\0' wallpaper; do
-  wallpapers_array+=("$wallpaper")
+WALLPAPERS_ARRAY=()
+while IFS= read -r -d $'\0' WALLPAPER; do
+  WALLPAPERS_ARRAY+=("$WALLPAPER")
 done < <(get_wallpapers)
 
-wallpaper_count="${#wallpapers_array[@]}"
+WALLPAPER_COUNT="${#WALLPAPERS_ARRAY[@]}"
 
-if [ "$wallpaper_count" -eq 0 ]; then
+if [ "$WALLPAPER_COUNT" -eq 0 ]; then
   exit 1
 fi
 
@@ -47,41 +46,41 @@ set_current_index() {
   echo "$1" > "$INDEX_FILE"
 }
 
-current_index=$(get_current_index)
+CURRENT_INDEX=$(get_current_index)
 
-argument="$1"
-if [ "$argument" == "--next" ]; then
-  if [[ "$current_index" =~ ^[0-9]+$ ]]; then # check if valid number
-    next_index=$((current_index + 1))
-    if [ "$next_index" -ge "$wallpaper_count" ]; then
-      index=0
+ARGUMENT="$1"
+if [ "$ARGUMENT" == "--next" ]; then
+  if [[ "$CURRENT_INDEX" =~ ^[0-9]+$ ]]; then # check if valid number
+    NEXT_INDEX=$((CURRENT_INDEX + 1))
+    if [ "$NEXT_INDEX" -ge "$WALLPAPER_COUNT" ]; then
+      INDEX=0
     else
-      index="$next_index"
+      INDEX="$NEXT_INDEX"
     fi
   else
-    index=0
+    INDEX=0
   fi
-elif [ "$argument" == "--prev" ]; then
-  if [[ "$current_index" =~ ^[0-9]+$ ]]; then # check if valid number
-    prev_index=$((current_index - 1))
-    if [ "$prev_index" -lt 0 ]; then
-      index=$((wallpaper_count - 1))
+elif [ "$ARGUMENT" == "--prev" ]; then
+  if [[ "$CURRENT_INDEX" =~ ^[0-9]+$ ]]; then # check if valid number
+    PREV_INDEX=$((CURRENT_INDEX - 1))
+    if [ "$PREV_INDEX" -lt 0 ]; then
+      INDEX=$((WALLPAPER_COUNT - 1))
     else
-      index="$prev_index"
+      INDEX="$PREV_INDEX"
     fi
   else
-    index=$((wallpaper_count - 1))
+    INDEX=$((WALLPAPER_COUNT - 1))
   fi
 else
-  index=$((RANDOM % wallpaper_count)) # random index on normal run
+  INDEX=$((RANDOM % WALLPAPER_COUNT)) # random index on normal run
 fi
 
-if [ "$index" -ge 0 ] && [ "$index" -lt "$wallpaper_count" ]; then
-  selected_wallpaper="${wallpapers_array[$index]}"
-  set_wallpaper "$selected_wallpaper"
-  set_current_index "$index"
+if [ "$INDEX" -ge 0 ] && [ "$INDEX" -lt "$WALLPAPER_COUNT" ]; then
+  SELECTED_WALLPAPER="${WALLPAPERS_ARRAY[$INDEX]}"
+  set_wallpaper "$SELECTED_WALLPAPER"
+  set_current_index "$INDEX"
 else
-  echo "Error: Invalid wallpaper index: $index"
+  echo "Error: Invalid wallpaper INDEX: $INDEX"
   exit 1
 fi
 

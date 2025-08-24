@@ -1,6 +1,9 @@
 # Config for sway
 # Read `man 5 sway` for a complete reference.
 
+# lock initially
+exec $HOME/.config/sway/scripts/lock.sh
+
 ### Variables
 #
 set $mod Mod4
@@ -34,6 +37,10 @@ output eDP-1 scale 1.2
 # your displays after another 300 seconds, and turn your screens back on when
 # resumed. It will also lock your screen before your computer goes to sleep.
 #
+exec swayidle -w \
+  timeout 600 "$HOME/.config/sway/scripts/lock.sh" \
+  timeout 660 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
+  before-sleep "$HOME/.config/sway/scripts/lock.sh"
 
 ### Input configuration
 #
@@ -218,7 +225,7 @@ font sans-serif 10
 hide_edge_borders smart
 
 ### Window size constraint
-floating_maximum_size 1600 x 940
+floating_maximum_size 1500 x 900
 floating_minimum_size 160 x 160
 
 ### Status bar

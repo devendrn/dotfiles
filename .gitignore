@@ -10,6 +10,8 @@
 !.config/sway/config
 !.config/sway/scripts
 !.config/sway/scripts/*
+!.config/swaylock
+!.config/swaylock/config
 !.config/foot
 !.config/foot/foot.ini
 !.config/waybar

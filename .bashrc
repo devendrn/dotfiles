@@ -25,4 +25,3 @@ alias dotfiles="git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
 
 PS1='\u@\h \[\e[92m\]\w\n\[\e[0m\]\$ '
 
-
