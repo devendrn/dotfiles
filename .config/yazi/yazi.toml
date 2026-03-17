@@ -1,0 +1,16 @@
+[opener]
+play = [
+	{ run = "mpv %s", orphan = true, for = "unix" },
+]
+edit = [
+	{ run = "nvim %s", block = true, for = "unix" },
+]
+open = [
+	{ run = "xdg-open %s", desc = "Open" },
+]
+
+[open]
+prepend_rules = [
+  { url = "*.desktop", use = [ "open" ] },
+]
+

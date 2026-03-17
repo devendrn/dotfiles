@@ -22,5 +22,6 @@
 !.config/fuzzel/fuzzel.ini
 !.config/zed
 !.config/zed/settings.json
-
+!.config/yazi
+!.config/yazi/*.toml
 

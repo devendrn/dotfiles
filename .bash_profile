@@ -8,3 +8,4 @@ if [ -z "$WAYLAND_DISPLAY" ] && [ -n "$XDG_VTNR" ] && [ "$XDG_VTNR" -eq 1 ] ; th
     export GTK_THEME=Adwaita:dark
     exec sway
 fi
+. "$HOME/.cargo/env"

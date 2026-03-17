@@ -8,8 +8,9 @@
 - Application launcher: [Fuzzel](https://codeberg.org/dnkl/fuzzel)  
 - Notification daemon: [Mako](https://github.com/emersion/mako)  
 - Text Editor: [Neovim](https://neovim.io/)  
-- File manager: [PCManFM](https://github.com/lxde/pcmanfm)  
+- File manager: [Yazi](https://github.com/sxyazi/yazi)  
 - Image Viewer: [qimv](https://github.com/easymodo/qimgv)  
+- Media Player: [mpv](https://github.com/mpv-player/mpv)  
 - Browser: [Firefox](https://www.firefox.com)  
 - Screenshot Utility: [grim](https://gitlab.freedesktop.org/emersion/grim), [slurp](https://github.com/emersion/slurp)  
 

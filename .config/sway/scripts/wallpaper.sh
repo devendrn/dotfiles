@@ -15,7 +15,7 @@ get_wallpapers() {
 set_wallpaper() {
   local WALLPAPER_PATH="$1"
   PREV_SWAYBG_PS="$(pgrep swaybg)"
-  swaybg --image "$WALLPAPER_PATH" &
+  swaybg --image "$WALLPAPER_PATH" -m fill &
   sleep 0.30
   if [ -n "$PREV_SWAYBG_PS" ]; then
     kill $PREV_SWAYBG_PS
@@ -77,6 +77,7 @@ fi
 
 if [ "$INDEX" -ge 0 ] && [ "$INDEX" -lt "$WALLPAPER_COUNT" ]; then
   SELECTED_WALLPAPER="${WALLPAPERS_ARRAY[$INDEX]}"
+  echo $SELECTED_WALLPAPER
   set_wallpaper "$SELECTED_WALLPAPER"
   set_current_index "$INDEX"
 else

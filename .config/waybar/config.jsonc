@@ -16,10 +16,11 @@
     // "modules-center": [],
     "modules-right": [
         "idle_inhibitor",
-        "cpu",
         "temperature",
+        "cpu",
         "memory",
         "network",
+        "bluetooth",
         "pulseaudio",
         "keyboard-state",
         // "backlight",
@@ -151,11 +152,11 @@
         "format": "{icon} {temperatureC}°C",
         "format-icons": ["", "", ""]
     },
-    // "backlight": {
-    //     // "device": "acpi_video1",
-    //     "format": "{percent}% {icon}",
-    //     "format-icons": ["🌑", "🌘", "🌗", "🌖", "🌕"]
-    // },
+    "backlight": {
+        // "device": "acpi_video1",
+        "format": "{percent}% {icon}",
+        "format-icons": ["🌑", "🌘", "🌗", "🌖", "🌕"]
+    },
     "battery": {
         "states": {
             // "good": 95,
@@ -166,24 +167,9 @@
         "format-charging": "󱐋 {capacity}%",
         "format-plugged": " {capacity}%",
         "format-alt": "{icon} {time}",
-        // "format-good": "", // An empty format will hide the module
         "format-full": "",
         "format-icons": ["", "", "", "", ""]
     },
-    // "battery#bat2": {
-    //     "bat": "BAT2"
-    // },
-    // "power-profiles-daemon": {
-    //   "format": "{icon}",
-    //   "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
-    //   "tooltip": true,
-    //   "format-icons": {
-    //     "default": "",
-    //     "performance": "",
-    //     "balanced": "",
-    //     "power-saver": ""
-    //   }
-    // },
     "network": {
         // "interface": "wlp2*", // (Optional) To force the use of this interface
         "format-wifi": "   {essid} ({signalStrength}%) <small>{bandwidthTotalBytes}</small>",
@@ -192,6 +178,16 @@
         "format-linked": "󰛳  {ifname} (No IP)",
         "format-disconnected": "Disconnected ⚠ {ifname}",
         "format-alt": "󰛳  {ifname}: {ipaddr}/{cidr}"
+    },
+    "bluetooth": {
+      "format": " {status}",
+      "format-connected": " {device_alias}",
+      "format-connected-battery": " {device_alias} {device_battery_percentage}%",
+      // "format-device-preference": [ "device1", "device2" ], // preference list deciding the displayed device
+      "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
+      "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
+      "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+      "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%"
     },
     "pulseaudio": {
         // "scroll-step": 1, // %, can be a float

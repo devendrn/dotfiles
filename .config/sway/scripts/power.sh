@@ -1,6 +1,6 @@
 #!/bin/bash
 
-SELECTION=$(printf "  Suspend\n󰍃  Lock\n󰐥  Power Off\n󰜉  Reboot" | fuzzel -d --width 10 --lines 4)
+SELECTION=$(printf "  Suspend\n󰍃  Lock\n󰐥  Power Off\n󰜉  Reboot" | fuzzel -d --width 11 --lines 4)
 
 case $SELECTION in 
   "  Suspend") systemctl suspend;;

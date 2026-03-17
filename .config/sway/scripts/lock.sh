@@ -28,4 +28,4 @@ if [ "$INDEX" -ge 0 ] && [ "$INDEX" -lt "$WALLPAPER_COUNT" ]; then
   WALLPAPER_ARG="-i ${WALLPAPERS_ARRAY[$INDEX]}"
 fi
 
-swaylock -f --indicator-idle-visible ${WALLPAPER_ARG} -F
+swaylock -f --indicator-idle-visible ${WALLPAPER_ARG} -F -s fill
