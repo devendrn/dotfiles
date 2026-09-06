@@ -211,15 +211,15 @@ input "type:keyboard" {
     bindsym --locked XF86AudioMicMute exec wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle
 
     # Adjust brightness via brightnessctl
-    bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%-
-    bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+
+    bindsym --locked XF86MonBrightnessDown exec brightnessctl set 2%-
+    bindsym --locked XF86MonBrightnessUp exec brightnessctl set 2%+
 
     # Take a screenshot
     bindsym Print exec $HOME/.config/sway/scripts/screenshot.sh
 
     # Adjust screen resolution
-    bindsym $mod+Alt+Down output eDP-1 res 1280x800
-    bindsym $mod+Alt+Up output eDP-1 res 1920x1200
+    bindsym $mod+Alt+Up output eDP-1 res 1920x1200 scale 1.2
+    bindsym $mod+Alt+Down output eDP-1 res 1280x800 scale 1.0
 
     # Cycle wallpapers
     bindsym $mod+Alt+Left exec $HOME/.config/sway/scripts/wallpaper.sh --prev
